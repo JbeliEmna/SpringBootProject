@@ -19,10 +19,9 @@ import java.util.Set;
 @Builder
 @Entity
 public class SalonDiscussion {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id ;
-    @Column(nullable = false)
+
     private String titre;
 
     @OneToMany(mappedBy = "salon", cascade = CascadeType.ALL, orphanRemoval = true)

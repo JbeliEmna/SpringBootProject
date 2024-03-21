@@ -1,10 +1,19 @@
 package com.jbeli.evaluation.interview;
 
-import com.jbeli.evaluation.PageResponse;
+
+import java.util.Date;
+import java.util.List;
 
 public interface InterviewService {
-    Interview findById(Integer id);
-    PageResponse<Interview> findAll(int page, int size);
+    InterviewResponse findById(Integer id);
+    List<InterviewResponse> findAll();
     void deleteById(Integer id);
-    Interview CreateInterview(Interview u);
+    Integer save(InterviewRequest u);
+
+    boolean interviewExisteParDateDebut(Date dateDebut);
+
+    boolean interviewExisteParDateFin(Date dateFin);
+
+
+
 }

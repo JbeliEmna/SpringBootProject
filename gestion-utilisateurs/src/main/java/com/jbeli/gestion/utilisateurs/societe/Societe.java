@@ -16,10 +16,11 @@ public class Societe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id ;
-    @NonNull
+
     private String Nom;
-    @Email
+
     private String email;
+
     @OneToOne(mappedBy = "societe")
     private Recruteur recruteur ;
 

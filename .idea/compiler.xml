@@ -8,10 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="evaluation" />
         <module name="config-server" />
-        <module name="gateway" />
         <module name="discovery" />
-        <module name="messagerie" />
         <module name="gestion-utilisateurs" />
+        <module name="project" />
+        <module name="gateway" />
+        <module name="messagerie" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -26,6 +27,7 @@
       <module name="gateway" options="-parameters" />
       <module name="gestion-utilisateurs" options="-parameters" />
       <module name="messagerie" options="-parameters" />
+      <module name="project" options="-parameters" />
       <module name="user-managment" options="-parameters" />
     </option>
   </component>

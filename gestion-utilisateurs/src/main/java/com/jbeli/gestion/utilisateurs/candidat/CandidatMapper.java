@@ -1,15 +1,30 @@
 package com.jbeli.gestion.utilisateurs.candidat;
 
-import com.jbeli.gestion.utilisateurs.utilisateur.UtilisateurMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Builder;
+import org.springframework.stereotype.Service;
 
+@Builder
+@Service
 public class CandidatMapper {
 
-    private final UtilisateurMapper mapper ;
-
-    @Autowired
-    public CandidatMapper(UtilisateurMapper mapper) {
-
-        this.mapper= mapper;
+    public CandidatResponse toCandidatDto(Candidat c) {
+        return CandidatResponse.builder()
+                .id(c.getId())
+                .email(c.getEmail())
+                .motDePasse(c.getMotDePasse())
+                .numTelephone(c.getNumTelephone())
+                .donneesGeo(c.getDonneesGeo())
+                .CV(c.getCV())
+                .domaine(c.getDomaine())
+                .build();
+    }
+    public Candidat toCandidat(CandidatRequest c) {
+        return Candidat.builder()
+                .id(c.getId())
+                .email(c.getEmail())
+                .motDePasse(c.getMotDePasse())
+                .numTelephone(c.getNumTelephone())
+                .donneesGeo(c.getDonneesGeo())
+                .build();
     }
 }

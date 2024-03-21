@@ -1,11 +1,14 @@
 package com.jbeli.evaluation.pieceJointe;
 
-import com.jbeli.evaluation.PageResponse;
-import com.jbeli.evaluation.interview.Interview;
+import java.util.List;
 
 public interface PieceJointeService {
-    PieceJointe findById(Integer id);
-    PageResponse<PieceJointe> findAll(int page, int size);
+    PieceJointeResponse findById(Integer id);
+    List<PieceJointeResponse> findAll();
     void deleteById(Integer id);
+
+    Integer save(PieceJointeRequest p );
+
+    boolean PieceJointeExisteParSujet(String sujet);
 
 }

@@ -17,22 +17,20 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
 public class Utilisateur {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id ;
-    @Email
-    @Column(unique = true)
+
+    private String nom;
+
     private String email;
-    @NotBlank
-    @Size (min=8 , max=20)
-    @Column(unique = true)
+
     private String motDePasse;
-    @NotBlank(message="Le numéro de téléphone ne peut pas être vide")
-    @Pattern(regexp="[0-9]{8}")
+
     private String numTelephone;
-    @NotBlank(message="les données géographiques ne peuvent pas  être vide")
+
     private String donneesGeo;
 
     @ManyToMany

@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.HashSet;
@@ -19,8 +21,10 @@ import java.util.Set;
 @Entity
 public class Candidat extends Utilisateur {
 
-    @NonNull
+
     private String CV ;
+
+    private String domaine;
 
     @ManyToMany
     @JoinTable(name = "candidat_offre",

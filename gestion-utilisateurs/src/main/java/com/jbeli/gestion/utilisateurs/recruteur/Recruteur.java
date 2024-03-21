@@ -20,7 +20,7 @@ import java.util.Set;
 @Entity
 public class Recruteur extends Utilisateur {
 
-    @NonNull
+
     private String type;
     @OneToOne
     @JoinColumn(name = "societe_id")

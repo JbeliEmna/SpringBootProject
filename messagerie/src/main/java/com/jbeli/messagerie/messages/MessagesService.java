@@ -1,11 +1,18 @@
 package com.jbeli.messagerie.messages;
 
-import com.jbeli.messagerie.PageResponse.PageResponse;
+import java.util.Date;
+import java.util.List;
 
 public interface MessagesService {
 
-    Messages findById(Integer id);
-    PageResponse<Messages> findAll(int page, int size);
+    MessagesResponse findById(Integer id);
+    List<MessagesResponse> findAll();
     void deleteById(Integer id);
-    Messages CreateUser(Messages u);
+
+    Integer save(MessagesRequest m);
+
+    boolean MessageExisteParDate(Date date);
+
+    boolean MessageExisteParEtat(EtatEnum etat);
+
 }

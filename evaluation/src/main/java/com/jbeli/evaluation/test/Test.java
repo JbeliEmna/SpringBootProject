@@ -21,10 +21,10 @@ public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id ;
-    @Column(nullable = false )
-    @Range(min = 0, max = 20, message = "La note doit être comprise entre 0 et 20")
+
     private int note;
-    @Temporal(TemporalType.TIMESTAMP)
+
+
     private Date date;
 
     @ManyToOne

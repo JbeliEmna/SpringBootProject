@@ -1,26 +1,23 @@
 package com.jbeli.gestion.utilisateurs.candidat;
 
-import com.jbeli.gestion.utilisateurs.utilisateur.PageResponse;
-import com.jbeli.gestion.utilisateurs.utilisateur.Utilisateur;
-
-public class CandidatServiceImpl implements CandidatService{
-    @Override
-    public Utilisateur findById(Integer id) {
-        return null;
+import com.jbeli.gestion.utilisateurs.utilisateur.UtilisateurMapper;
+import com.jbeli.gestion.utilisateurs.utilisateur.UtilisateurRepository;
+import com.jbeli.gestion.utilisateurs.utilisateur.UtilisateurServiceImpl;
+import org.springframework.stereotype.Service;
+import java.util.List;
+@Service
+public class CandidatServiceImpl extends UtilisateurServiceImpl implements CandidatService {
+    public CandidatServiceImpl(UtilisateurRepository repository, UtilisateurMapper mapper, CandidatRepository candidatRepository) {
+        super(repository, mapper);
+        this.candidatRepository = candidatRepository;
     }
+    private final CandidatRepository candidatRepository;
 
-    @Override
-    public PageResponse<Utilisateur> findAll(int page, int size) {
-        return null;
-    }
-
-    @Override
-    public void deleteById(Integer id) {
-
-    }
 
     @Override
-    public Utilisateur CreateUser(Utilisateur u) {
-        return null;
+    public List<Candidat> rechercherCandidatsParDomaine(String domaine) {
+        return candidatRepository.findByDomaine(domaine);
     }
+
 }
+

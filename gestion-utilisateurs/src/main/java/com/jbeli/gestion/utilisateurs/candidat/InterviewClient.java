@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient(name = "evaluation-service")
 public interface InterviewClient {
     @PostMapping("/interview/{interviewId}/candidat/{candidatId}")
-    void ajouterCandidatAuInterview(@PathVariable("candidatId") Integer candidatId, @PathVariable("interviewId") Integer interviewId);
+    static void ajouterCandidatAuInterview(@PathVariable("candidatId") Integer candidatId, @PathVariable("interviewId") Integer interviewId) {
+        System.out.println("Candidat ajouter");
+    }
 
 }
 

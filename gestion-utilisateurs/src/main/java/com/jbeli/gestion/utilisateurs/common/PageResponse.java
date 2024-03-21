@@ -1,6 +1,10 @@
-package com.jbeli.evaluation;
+package com.jbeli.gestion.utilisateurs.common;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -16,6 +20,3 @@ public class PageResponse<T> {
 
 
 }
-
-
-

@@ -12,7 +12,7 @@ import lombok.*;
 @Entity
 public class Reclamation extends Messages {
 
-    @Column(nullable = false)
+
     private String sujet;
 
 }

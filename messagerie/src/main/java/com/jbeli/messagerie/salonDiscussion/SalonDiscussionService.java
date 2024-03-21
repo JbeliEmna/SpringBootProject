@@ -1,13 +1,16 @@
 package com.jbeli.messagerie.salonDiscussion;
 
-import com.jbeli.gestion.utilisateurs.utilisateur.Utilisateur;
-import com.jbeli.messagerie.PageResponse.PageResponse;
-import com.jbeli.messagerie.messages.Messages;
+
+import java.util.Date;
+import java.util.List;
 
 public interface SalonDiscussionService {
-    SalonDiscussion findById(Integer id);
-    PageResponse<SalonDiscussion> findAll(int page, int size);
+    SalonDiscussionResponse findById(Integer id);
+    List<SalonDiscussionResponse> findAll();
     void deleteById(Integer id);
-    SalonDiscussion CreateUser(SalonDiscussion u);
+
+    Integer save(SalonDiscussionRequest s);
+
+    boolean SalonDiscussionExisteParTitre(String titre);
 
 }

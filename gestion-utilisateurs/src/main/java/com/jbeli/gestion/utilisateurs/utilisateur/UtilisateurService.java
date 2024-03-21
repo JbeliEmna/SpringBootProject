@@ -1,11 +1,18 @@
 package com.jbeli.gestion.utilisateurs.utilisateur;
 
+import com.jbeli.gestion.utilisateurs.common.PageResponse;
+
 public interface UtilisateurService {
 
-    Utilisateur findById(Integer id);
-    PageResponse<Utilisateur> findAll(int page, int size);
+    UtilisateurResponse  findById(Integer id);
+
+    PageResponse<UtilisateurResponse> findAll(int page, int size);
+
     void deleteById(Integer id);
-    Utilisateur CreateUser(Utilisateur u);
+    Integer save(UtilisateurRequest u);
 
+    boolean utilisateurExisteParEmail(String email);
+    boolean utilisateurExisteParNumTel(String numTelephone);
 
+    void changerMotDePasse(Integer id, String nouveauMotDePasse);
 }

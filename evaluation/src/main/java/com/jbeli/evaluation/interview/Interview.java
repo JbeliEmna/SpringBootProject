@@ -21,11 +21,9 @@ public class Interview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id ;
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
+
     private Date dateDebut;
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
+
     private Date dateFin;
 
     @OneToMany(mappedBy = "interview",  orphanRemoval = true)

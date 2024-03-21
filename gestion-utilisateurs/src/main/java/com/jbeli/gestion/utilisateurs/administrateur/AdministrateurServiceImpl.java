@@ -1,26 +1,15 @@
 package com.jbeli.gestion.utilisateurs.administrateur;
 
-import com.jbeli.gestion.utilisateurs.utilisateur.PageResponse;
-import com.jbeli.gestion.utilisateurs.utilisateur.Utilisateur;
 
-public class AdministrateurServiceImpl implements AdministrateurService{
-    @Override
-    public Utilisateur findById(Integer id) {
-        return null;
-    }
+import com.jbeli.gestion.utilisateurs.utilisateur.UtilisateurMapper;
+import com.jbeli.gestion.utilisateurs.utilisateur.UtilisateurRepository;
+import com.jbeli.gestion.utilisateurs.utilisateur.UtilisateurServiceImpl;
+import org.springframework.stereotype.Service;
 
-    @Override
-    public PageResponse<Utilisateur> findAll(int page, int size) {
-        return null;
-    }
+@Service
+public class AdministrateurServiceImpl extends UtilisateurServiceImpl implements AdministrateurService{
 
-    @Override
-    public void deleteById(Integer id) {
-
-    }
-
-    @Override
-    public Utilisateur CreateUser(Utilisateur u) {
-        return null;
+    public AdministrateurServiceImpl(UtilisateurRepository repository, UtilisateurMapper mapper) {
+        super(repository, mapper);
     }
 }

@@ -17,10 +17,9 @@ import java.util.Set;
 @Entity
 public class OffreEmploi {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id ;
-    @NonNull
+
     private String description;
 
     @ManyToMany(mappedBy = "offres")

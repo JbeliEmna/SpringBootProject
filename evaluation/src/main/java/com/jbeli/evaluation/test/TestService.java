@@ -1,11 +1,14 @@
 package com.jbeli.evaluation.test;
 
-import com.jbeli.evaluation.PageResponse;
-import com.jbeli.evaluation.interview.Interview;
+
+import java.util.Date;
+import java.util.List;
 
 public interface TestService {
-    Test findById(Integer id);
-    PageResponse<Test> findAll(int page, int size);
+    TestResponse findById(Integer id);
+    List<TestResponse> findAll();
     void deleteById(Integer id);
-    Test CreateTest(Test test);
+    Integer save(TestRequest test );
+
+    boolean TestExisteParDate(Date date);
 }
