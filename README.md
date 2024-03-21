@@ -3,4 +3,5 @@
 =======
 PFE PROJECT
 SPRING BOOT
->>>>>>> 9e39ece (microservice : couche modele)
+(microservice : couche modele)
+j'ai un probleme dans les dependances
