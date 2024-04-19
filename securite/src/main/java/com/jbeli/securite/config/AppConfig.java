@@ -1,6 +1,8 @@
 package com.jbeli.securite.config;
 
+import com.jbeli.securite.user.User;
 import com.jbeli.securite.user.UserRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,19 +12,22 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-
 import java.util.Arrays;
 import java.util.Collections;
 
 @Configuration
 @RequiredArgsConstructor
-public class AppConfig {
+@Service
+@AllArgsConstructor
+public class AppConfig  {
 
     private final UserRepository repository;
+    private final User user;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -31,7 +36,7 @@ public class AppConfig {
             @Transactional
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
                 return repository.findByEmail(email)
-                        .orElseThrow(() -> new UsernameNotFoundException("User not found with email:: " + email));
+                        .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé avec l'email : " + email));
             }
         };
     }

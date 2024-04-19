@@ -1,5 +1,6 @@
 package com.jbeli.securite.auth;
 
+
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -30,4 +31,9 @@ public class RegisterRequest {
     @Column(unique = true)
     @NotNull(message = "le mot de passe ne peut pas être vide")
     private String motDePasse;
+
+    @Column(unique = true)
+    @NotNull(message = " role ne peut pas être vide")
+    @NotEmpty(message = "role ne peut pas être vide")
+    private String role;
 }

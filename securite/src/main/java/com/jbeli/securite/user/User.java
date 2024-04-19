@@ -1,44 +1,38 @@
 package com.jbeli.securite.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import java.util.Collections;
 import static jakarta.persistence.DiscriminatorType.STRING;
 import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode
 @Entity
 @Table(name = "_user")
 @Inheritance(strategy = SINGLE_TABLE)
 @DiscriminatorColumn(name = "user_type", discriminatorType = STRING)
 public class User implements UserDetails {
 
+    @SequenceGenerator(
+            name="user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
     @Id
-    @GeneratedValue
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
     private Integer id;
     @Column(nullable = false)
     private String nom;
@@ -46,18 +40,28 @@ public class User implements UserDetails {
     private String prenom;
     private String motDePasse;
     private String email;
-    private boolean enabled;
-    // @Enumerated(EnumType.STRING)
-    // private RoleEnum role;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    private boolean enabled = false;
+    private boolean locked = false;
+    @Enumerated(EnumType.STRING)
+     private RoleEnum role;
+
+
+    public User(String nom, String email, String motDePasse, String role) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.motDePasse = motDePasse;
+        this.email = email;
+        this.role = RoleEnum.valueOf(role);
+    }
+
+    public User(User user) {
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles
-                .stream()
-                .map(r -> new SimpleGrantedAuthority(r.getName().name()))
-                .collect(Collectors.toList());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
+        return Collections.singletonList(authority);
     }
 
     @Override
@@ -77,7 +81,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !locked;
     }
 
     @Override

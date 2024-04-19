@@ -1,14 +1,9 @@
 package com.jbeli.gestion.utilisateurs.utilisateur;
 
-import com.jbeli.gestion.utilisateurs.OffreEmploi.OffreEmploi;
 import com.jbeli.messagerie.salonDiscussion.SalonDiscussion;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-
 import lombok.*;
-
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
