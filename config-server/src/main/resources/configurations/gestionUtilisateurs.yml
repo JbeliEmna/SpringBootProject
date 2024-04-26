@@ -22,3 +22,7 @@ spring :
     show-sql: true
     database: postgresql
     databasePlatform: org.hibernate.dialect.PostgreSQLDialect
+
+
+main:
+  allow-circular-references: true

@@ -1,6 +1,9 @@
 package com.jbeli.gestion.utilisateurs.utilisateur;
 
 import com.jbeli.gestion.utilisateurs.common.PageResponse;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpStatus;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/utilisateur")
 @RequiredArgsConstructor
+@Api(description = "Job offer API having endpoints which are used to interact with gestion utilisateur microservice")
 public class UtilisateurController {
 
     private final UtilisateurService utilisateurService;
@@ -26,7 +30,9 @@ public class UtilisateurController {
 
 
     @PostMapping
+    @ApiOperation("Used to add user to the system")
     public ResponseEntity<Integer> save(
+            @ApiParam("Information about user to be added to the system ")
             @RequestBody @Valid UtilisateurRequest utilisateur
     ) {
         return ResponseEntity
@@ -35,12 +41,14 @@ public class UtilisateurController {
 
     @GetMapping("/{utilisateur-id}")
     public ResponseEntity<UtilisateurResponse> findById(
+            @ApiParam("find user by id ")
             @PathVariable("utilisateur-id") Integer utilisateurId
     ) {
         return ResponseEntity.ok(utilisateurService.findById(utilisateurId));
     }
 
     @GetMapping
+    @ApiOperation("listed all the usersexist in the system")
     public ResponseEntity<PageResponse<UtilisateurResponse>> findAll(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "4", required = false) int size
@@ -59,15 +67,18 @@ public class UtilisateurController {
     }
 
     @GetMapping("/existe/{utilisateur-email}")
+    @ApiOperation("find user by email")
     public boolean utilisateurExisteParEmail(@PathVariable String email){
         return utilisateurService.utilisateurExisteParEmail(email);
     }
     @GetMapping("/existe/{utilisateur-NumTel}")
+    @ApiOperation("find user by phone number")
     public boolean utilisateurExisteParNumTel(String numTelephone){
         return utilisateurService.utilisateurExisteParNumTel(numTelephone);
     }
 
     @PostMapping("/changerMotDePasse/{utilisateur-id}")
+    @ApiOperation("change user password on the system")
     public ResponseEntity changerMotDePasse( @PathVariable Integer id, @PathVariable String nouveauMotDePasse){
         UtilisateurResponse u= utilisateurService.findById(id);
         UtilisateurRequest request = new UtilisateurRequest();

@@ -1,13 +1,24 @@
 package com.jbeli.securite.user;
 
+import com.jbeli.securite.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static jakarta.persistence.DiscriminatorType.STRING;
 import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 
@@ -15,24 +26,16 @@ import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "_user")
-@Inheritance(strategy = SINGLE_TABLE)
-@DiscriminatorColumn(name = "user_type", discriminatorType = STRING)
-public class User implements UserDetails {
+public class User implements UserDetails, Principal {
 
-    @SequenceGenerator(
-            name="user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
     private String nom;
@@ -40,28 +43,28 @@ public class User implements UserDetails {
     private String prenom;
     private String motDePasse;
     private String email;
+    private LocalDate DateNaissance ;
     private boolean enabled = false;
     private boolean locked = false;
-    @Enumerated(EnumType.STRING)
-     private RoleEnum role;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
 
-    public User(String nom, String email, String motDePasse, String role) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.motDePasse = motDePasse;
-        this.email = email;
-        this.role = RoleEnum.valueOf(role);
-    }
+    @CreatedDate
+    @Column(nullable = false , updatable = false)
+    private LocalDateTime DateCreation;
+    @LastModifiedDate
+    @Column(insertable = false)
+    private LocalDateTime DateDerniereModification ;
 
-    public User(User user) {
-    }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
-        return Collections.singletonList(authority);
+        return this.roles
+                .stream()
+                .map(r -> new SimpleGrantedAuthority(r.getNom()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -92,5 +95,14 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    @Override
+    public String getName() {
+        return email;
+    }
+
+    public String FullName(){
+        return nom+" "+prenom;
     }
 }

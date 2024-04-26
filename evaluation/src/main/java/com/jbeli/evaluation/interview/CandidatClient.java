@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "gestion-utilisateur-service")
 public interface CandidatClient {
 
+
     @GetMapping("/candidat/{id}")
-    static Candidat findById(@PathVariable Integer id);
+    static Candidat findById(@PathVariable Integer id) {
+        return null;
+    }
 }

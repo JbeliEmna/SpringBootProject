@@ -93,15 +93,16 @@
 			<artifactId>webjars-locator-core</artifactId>
 			<version>0.46</version>
 		</dependency>
+
 		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>angular-cli</artifactId>
-			<version>12.2.10</version>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>webjars-locator-joda-time</artifactId>
-			<version>0.46</version>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
 		</dependency>
     </dependencies>
 	<dependencyManagement>

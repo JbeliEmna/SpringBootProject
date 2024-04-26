@@ -1,6 +1,9 @@
 package com.jbeli.gestion.utilisateurs.recruteur;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +16,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/recruteur")
 @RequiredArgsConstructor
+@Api(description = "employer API having endpoints which are used to interact with gestion utilisateur microservice")
 public class RecruteurController {
     private final RecruteurService recruteurService;
 
     @GetMapping("/rechercherParType")
-    public ResponseEntity<List<Recruteur>> rechercherRecruteursParType(@RequestParam("type") String type) {
+    @ApiOperation("Listed the employers depending on the type")
+    public ResponseEntity<List<Recruteur>> rechercherRecruteursParType(
+            @ApiParam("the type used to find the employers")
+            @RequestParam("type") String type) {
         List<Recruteur> recruteurs = recruteurService.rechercherRecruteursParType(type);
         if (recruteurs.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

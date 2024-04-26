@@ -1,0 +1,50 @@
+spring :
+  application:
+    name : securite-dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/securite-db?createDatabaseIfNotExist=true
+    username: postgres
+    password: Emna@2024
+  jpa :
+    hibernate:
+      ddlAuto: update
+    show-sql: true
+    database: postgresql
+    databasePlatform: org.hibernate.dialect.PostgreSQLDialect
+  mail :
+    host : localhost
+    port : 1025
+    username : project
+    password : project
+    properties :
+      mail :
+        smtp :
+          trust : "*"
+        auth : true
+        starttls:
+          enable: true
+        connectiontimeout : 5000
+        timeout : 3000
+        writetimeout : 5000
+application:
+  security:
+    jwt:
+      secret-key: de7924db8a9f3f52f17c910e069b76298f9792430f785e1c1d2b5583361f4b0b
+      expiration : 8640000
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate-aacount
+
+
+
+
+
+
+
+
+
+
+
+
+

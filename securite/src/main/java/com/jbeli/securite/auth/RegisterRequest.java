@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,6 +22,10 @@ public class RegisterRequest {
     @NotBlank(message = "le nom ne peut pas être vide")
     private String nom;
 
+    @NotNull(message = "le prenom ne peut pas être vide")
+    @NotBlank(message = "le prenom ne peut pas être vide")
+    private String prenom;
+
     @Column(unique = true)
     @NotNull(message = " email ne peut pas être vide")
     @NotEmpty(message = "email ne peut pas être vide")
@@ -27,13 +33,13 @@ public class RegisterRequest {
     private String email;
 
     @NotEmpty(message = "le mot de passe ne peut pas être vide")
-    @Size(min=8 , max=20)
+    @Size(min=8 , max=20 , message = "le mot de passe doit être de 8 caractères minimum et 20 ...")
     @Column(unique = true)
     @NotNull(message = "le mot de passe ne peut pas être vide")
     private String motDePasse;
 
-    @Column(unique = true)
-    @NotNull(message = " role ne peut pas être vide")
-    @NotEmpty(message = "role ne peut pas être vide")
-    private String role;
+    @NotNull(message = "la date de naissance ne peut pas être vide")
+    @NotBlank(message = "la date de naissance ne peut pas être vide")
+    private LocalDate DateNaissance;
+
 }

@@ -24,3 +24,6 @@ spring :
     databasePlatform: org.hibernate.dialect.PostgreSQLDialect
 
 
+
+main:
+  allow-circular-references : true

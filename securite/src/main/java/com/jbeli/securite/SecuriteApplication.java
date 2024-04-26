@@ -4,18 +4,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
-//@OpenAPIDefinition(
-//		security = @SecurityRequirement(name = "bearerAuth")
-//)
-//@SecurityScheme(
-//		name = "bearerAuth",
-//		description = "Some desc",
-//		scheme = "bearer",
-//		type = SecuritySchemeType.HTTP,
-//		in = SecuritySchemeIn.HEADER
-//)
+@EnableJpaAuditing
+@EnableAsync
 public class SecuriteApplication {
 
 	public static void main(String[] args) {

@@ -3,36 +3,53 @@ package com.jbeli.securite.email;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
-public class EmailService implements EmailSender {
+@RequiredArgsConstructor
+public class EmailService  {
 
     private final JavaMailSender mailSender;
-    private final static Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
-    @Override
+    private final SpringTemplateEngine templateEngine;
     @Async
-    public void send(String to, String email) {
-        try{
+    public void sendEmail(String to, String username , EmailTemplateName emailTemplate , String confirmationUrl , String activationCode , String subject) throws MessagingException {
+        String templateName;
+        if(emailTemplate == null) {
+            templateName = "confirm-email";
+        }else {
+            templateName = emailTemplate.name();
+        }
         MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-        helper.setText(email , true);
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,MimeMessageHelper.MULTIPART_MODE_MIXED, StandardCharsets.UTF_8.name());
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("username ", username);
+        properties.put("confirmationUrl" , confirmationUrl);
+        properties.put("activation_code" , activationCode);
+
+        Context context = new Context();
+        context.setVariables(properties);
+
+        helper.setFrom("contact@job.com");
         helper.setTo(to);
-        helper.setSubject("validez votre email");
-        helper.setFrom("votre_adresse_email@example.com");
+        helper.setSubject(subject);
+
+        String template = templateEngine.process(templateName , context);
+
+        helper.setText(template, true);
         mailSender.send(mimeMessage);
-        }
-        catch (MessagingException e)
-        {
-            LOGGER.error("échec de l'envoi de l'e-mail" , e);
-            throw new IllegalStateException("échec de l'envoi de l'e-mail");
-        }
+
 
     }
 }

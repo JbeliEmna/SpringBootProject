@@ -1,0 +1,5 @@
+spring :
+  application:
+    name : securite-dev
+  config:
+    import : optional:configserver:http://localhost:8888

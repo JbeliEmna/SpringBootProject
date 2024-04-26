@@ -1,6 +1,9 @@
 package com.jbeli.messagerie.salonDiscussion;
 
 import com.jbeli.gestion.utilisateurs.utilisateur.Utilisateur;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/salonDiscussion")
 @RequiredArgsConstructor
+@Api(description = "chat room API having endpoints which are used to interact with messagerie microservice")
 public class SalonDiscussionController {
 
     @Autowired
@@ -30,6 +34,7 @@ public class SalonDiscussionController {
     }
 
     @PostMapping
+    @ApiOperation("Used to add chat room to the system")
     public ResponseEntity<Integer> save(
             @RequestBody @Valid SalonDiscussionRequest discussion
     ) {
@@ -39,12 +44,14 @@ public class SalonDiscussionController {
 
     @GetMapping("/{salonDiscussion-id}")
     public ResponseEntity<SalonDiscussionResponse> findById(
+            @ApiParam("find the chat room by id")
             @PathVariable("salonDiscussion-id") Integer discussionId
     ) {
         return ResponseEntity.ok(salonDiscussionService.findById(discussionId));
     }
 
     @GetMapping
+    @ApiOperation("listed all the chat rooms exist in the system")
     public ResponseEntity<List<SalonDiscussionResponse>> findAll() {
 
         return ResponseEntity.ok(salonDiscussionService.findAll());
@@ -61,7 +68,10 @@ public class SalonDiscussionController {
     }
 
     @GetMapping("/existe_par_titre/{salonDiscussion-titre}")
-    public boolean SalonDiscussionExisteParTitre(@PathVariable String titre){
+    @ApiOperation("Used to find chat room by title")
+    public boolean SalonDiscussionExisteParTitre(
+            @ApiParam("title to find the chat room")
+            @PathVariable String titre){
         return salonDiscussionService.SalonDiscussionExisteParTitre(titre);
     }
 
