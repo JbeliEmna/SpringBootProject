@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/utilisateur")
 @RequiredArgsConstructor
@@ -18,14 +20,18 @@ import org.springframework.web.bind.annotation.*;
 public class UtilisateurController {
 
     private final UtilisateurService utilisateurService;
-    @Autowired
-    private SalonDiscussionClient salonDiscussionClient;
+  //  @Autowired
+   //private SalonDiscussionClient salonDiscussionClient;
 
-    @PostMapping("/utilisateur/{utilisateurId}/salon/{salonId}")
-    public void ajouterUtilisateurAuSalon(@PathVariable Integer utilisateurId, @PathVariable Integer salonId) {
+    //@PostMapping("/utilisateur/{utilisateurId}/salon/{salonId}")
+    //public void ajouterUtilisateurAuSalon(@PathVariable Integer utilisateurId, @PathVariable Integer salonId) {
 
-        salonDiscussionClient.ajouterUtilisateurAuSalon(utilisateurId, salonId);
+      //  salonDiscussionClient.ajouterUtilisateurAuSalon(utilisateurId, salonId);}
+    @GetMapping("/salonDiscussion/{salonDiscussion-id}")
+    public ResponseEntity<List<Utilisateur>> findAllUsers(@PathVariable("salonDiscussion-id") Integer salonDiscussionId){
+        return ResponseEntity.ok((utilisateurService.findAllUsersBySalonDiscussion(salonDiscussionId)));
     }
+
 
 
 
@@ -84,7 +90,6 @@ public class UtilisateurController {
         UtilisateurRequest request = new UtilisateurRequest();
         if(u !=null){
             UtilisateurRequest.builder()
-                    .id(u.getId())
                     .email(u.getEmail())
                     .motDePasse(u.getMotDePasse())
                     .numTelephone(u.getNumTelephone())

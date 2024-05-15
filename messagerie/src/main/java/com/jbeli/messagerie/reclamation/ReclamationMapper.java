@@ -6,16 +6,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@Builder
-@RequiredArgsConstructor
 public class ReclamationMapper {
 
-    private final MessagesMapper messagesMapper;
-
     public ReclamationResponse toReclamationDto(Reclamation r) {
-        return ReclamationResponse.builder()
-                .sujet(r.getSujet())
-                .build();
+       ReclamationResponse reclamationResponse = new ReclamationResponse();
+        reclamationResponse.setId(r.getId());
+        reclamationResponse.setSujet(r.getSujet());
+        return reclamationResponse;
     }
 
+    public Reclamation toReclamation(ReclamationRequest r){
+        Reclamation reclamation = new Reclamation();
+        reclamation.setId(r.getId());
+        reclamation.setMessage(r.getMessage());
+        return reclamation;
+    }
 }

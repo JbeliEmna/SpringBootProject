@@ -6,10 +6,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
-@Builder
 @Entity
-public class ReclamationRequest {
+public class ReclamationRequest extends MessagesRequest{
 
-    private final MessagesRequest messagesRequest;
 }

@@ -2,26 +2,22 @@ package com.jbeli.gestion.utilisateurs.recruteur;
 
 import com.jbeli.gestion.utilisateurs.utilisateur.UtilisateurResponse;
 import jakarta.persistence.Entity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Builder
+
 @Setter
 @Getter
 @Entity
-public class RecruteurResponse {
+public class RecruteurResponse extends UtilisateurResponse {
 
-    private final UtilisateurResponse uResponse ;
 
-    @Autowired
-    public RecruteurResponse(UtilisateurResponse uResponse, @NonNull String type) {
-        this.uResponse = uResponse;
-        this.type = type;
-    }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id ;
     @NonNull
     private String type;
 }

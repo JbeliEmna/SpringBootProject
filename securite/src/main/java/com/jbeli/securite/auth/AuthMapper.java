@@ -1,6 +1,6 @@
 package com.jbeli.securite.auth;
 
-import com.jbeli.gestion.utilisateurs.utilisateur.Utilisateur;
+import com.jbeli.securite.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 public class AuthMapper {
 
     @Autowired
-    private Utilisateur utilisateur;
+    private User user;
 
-    public Utilisateur toUtilisateur(RegisterRequest s){
-        Utilisateur utilisateur = new Utilisateur();
+    public User toUtilisateur(RegisterRequest s){
+        User utilisateur = new User();
         utilisateur.setNom(s.getNom());
         utilisateur.setEmail(s.getEmail());
         utilisateur.setMotDePasse(s.getMotDePasse());

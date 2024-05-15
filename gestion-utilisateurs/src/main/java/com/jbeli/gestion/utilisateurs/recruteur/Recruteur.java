@@ -18,7 +18,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
 @ApiModel("Contains all the attributes required under employer entity")
 public class Recruteur extends Utilisateur {

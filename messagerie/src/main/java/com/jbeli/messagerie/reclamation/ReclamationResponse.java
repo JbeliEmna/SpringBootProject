@@ -1,19 +1,18 @@
 package com.jbeli.messagerie.reclamation;
 
 import com.jbeli.messagerie.messages.MessagesResponse;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
-@Builder
 @Entity
-public class ReclamationResponse {
+public class ReclamationResponse extends MessagesResponse {
 
-    private final MessagesResponse messagesResponse;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(nullable = false)
     private String sujet;
 

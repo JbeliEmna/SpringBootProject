@@ -2,9 +2,7 @@ package com.jbeli.securite.user;
 
 import com.jbeli.securite.token.ConfirmationToken;
 import com.jbeli.securite.token.ConfirmationTokenService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +16,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-
+@Setter
+@Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class UserService  implements UserDetailsService {
 @Autowired

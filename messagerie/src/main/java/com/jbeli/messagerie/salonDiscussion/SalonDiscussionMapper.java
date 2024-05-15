@@ -1,6 +1,5 @@
 package com.jbeli.messagerie.salonDiscussion;
 
-import com.jbeli.messagerie.messages.Messages;
 
 import lombok.Builder;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ public class SalonDiscussionMapper {
     }
 
     public SalonDiscussion toSalonDiscussion(SalonDiscussionRequest s) {
-        return Messages.builder()
+        return SalonDiscussion.builder()
                 .id(s.getId())
                 .titre(s.getTitre())
                 .build();

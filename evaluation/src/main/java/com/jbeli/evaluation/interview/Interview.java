@@ -2,14 +2,10 @@ package com.jbeli.evaluation.interview;
 
 
 import com.jbeli.evaluation.test.Test;
-import com.jbeli.gestion.utilisateurs.candidat.Candidat;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-
 import java.util.*;
 
 @Getter
@@ -35,12 +31,10 @@ public class Interview {
     @OneToMany(mappedBy = "interview",  orphanRemoval = true)
     private List<Test> tests = new ArrayList<>();
 
-    @Getter
-    private List<Candidat> candidats;
+    //@Getter
+  //  private List<Candidat> candidats;
 
-    public List<Candidat> getCandidat() {
-        return candidats;
-    }
+   // public List<Candidat> getCandidat() {return candidats;}
 
 
 

@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class UtilisateurServiceImpl implements UtilisateurService {
@@ -68,7 +70,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         }
     }
 
-
+    @Override
+    public List<Utilisateur> findAllUsersBySalonDiscussion(Integer salonDiscussionId) {
+        return repository.findAllBySalonDiscussionId(salonDiscussionId);
+    }
 
 
 }

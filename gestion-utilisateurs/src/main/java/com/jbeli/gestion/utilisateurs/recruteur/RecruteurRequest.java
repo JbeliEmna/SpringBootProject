@@ -6,15 +6,7 @@ import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 @Getter
 @Setter
-@Builder
 @Entity
-public class RecruteurRequest {
 
-    private final UtilisateurRequest uRequest ;
+public class RecruteurRequest extends UtilisateurRequest{}
 
-    @Autowired
-    public RecruteurRequest(UtilisateurRequest uRequest) {
-
-        this.uRequest= uRequest;
-    }
-}

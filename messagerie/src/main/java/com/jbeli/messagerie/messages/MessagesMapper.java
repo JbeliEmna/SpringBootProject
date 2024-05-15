@@ -1,10 +1,11 @@
 package com.jbeli.messagerie.messages;
 
 import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
-@Builder
+@SuperBuilder
 public class MessagesMapper {
 
     public MessagesResponse toMessagesDto(Messages m) {

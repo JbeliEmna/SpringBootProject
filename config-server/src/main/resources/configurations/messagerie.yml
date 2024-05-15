@@ -4,6 +4,8 @@ eureka :
   client :
     service-url :
       defaultZone : http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
 
 server:
   port : 8070
@@ -11,19 +13,18 @@ server:
 spring :
   application:
     name : messagerie
+    config:
+      utilisateurs-url: hhtp://localhost:8070/api/v1/utilisateurs
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/messagerie-db?createDatabaseIfNotExist=true
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: Emna@2024
   jpa :
     hibernate:
-      ddlAuto: update
+      ddl-auto: update
     show-sql: true
     database: postgresql
-    databasePlatform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 
-
-main:
-  allow-circular-references : true

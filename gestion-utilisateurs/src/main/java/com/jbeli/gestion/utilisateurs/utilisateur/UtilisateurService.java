@@ -2,6 +2,8 @@ package com.jbeli.gestion.utilisateurs.utilisateur;
 
 import com.jbeli.gestion.utilisateurs.common.PageResponse;
 
+import java.util.List;
+
 public interface UtilisateurService {
 
     UtilisateurResponse  findById(Integer id);
@@ -15,4 +17,6 @@ public interface UtilisateurService {
     boolean utilisateurExisteParNumTel(String numTelephone);
 
     void changerMotDePasse(Integer id, String nouveauMotDePasse);
+
+    List<Utilisateur> findAllUsersBySalonDiscussion(Integer salonDiscussionId);
 }

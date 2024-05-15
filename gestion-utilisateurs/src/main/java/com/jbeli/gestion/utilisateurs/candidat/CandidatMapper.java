@@ -3,28 +3,23 @@ package com.jbeli.gestion.utilisateurs.candidat;
 import lombok.Builder;
 import org.springframework.stereotype.Service;
 
-@Builder
+
 @Service
 public class CandidatMapper {
 
     public CandidatResponse toCandidatDto(Candidat c) {
-        return CandidatResponse.builder()
-                .id(c.getId())
-                .email(c.getEmail())
-                .motDePasse(c.getMotDePasse())
-                .numTelephone(c.getNumTelephone())
-                .donneesGeo(c.getDonneesGeo())
-                .CV(c.getCV())
-                .domaine(c.getDomaine())
-                .build();
+        CandidatResponse candidatResponse = new CandidatResponse();
+        candidatResponse.setId(c.getId());
+        candidatResponse.setCV(c.getCV());
+        candidatResponse.setDomaine(c.getDomaine());
+        return candidatResponse;
     }
     public Candidat toCandidat(CandidatRequest c) {
-        return Candidat.builder()
-                .id(c.getId())
-                .email(c.getEmail())
-                .motDePasse(c.getMotDePasse())
-                .numTelephone(c.getNumTelephone())
-                .donneesGeo(c.getDonneesGeo())
-                .build();
+        Candidat candidat = new Candidat();
+        candidat.setNom(c.getNom());
+        candidat.setEmail(c.getEmail());
+        candidat.setMotDePasse(c.getMotDePasse());
+        candidat.setNumTelephone(c.getNumTelephone());
+        return candidat;
     }
 }

@@ -1,16 +1,12 @@
 package com.jbeli.evaluation.interview;
 
-import com.jbeli.gestion.utilisateurs.candidat.Candidat;
-import com.jbeli.gestion.utilisateurs.utilisateur.UtilisateurRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -20,27 +16,7 @@ import java.util.List;
 @Api(description = "Interview API having endpoints which are used to interact with evaluation microservice")
 public class InterviewController {
 
-    @Autowired
-    private InterviewRepository interviewRepository;
-    @Autowired
-    private CandidatClient candidatClient;
-
     private final InterviewService service;
-
-    public InterviewController(InterviewRepository interviewRepository, CandidatClient candidatClient, InterviewService service) {
-        this.interviewRepository = interviewRepository;
-        this.candidatClient = candidatClient;
-        this.service = service;
-    }
-
-    @PostMapping("/salon/{salonId}/utilisateur/{utilisateurId}")
-    public void ajouterUtilisateurAuSalon(@PathVariable Integer salonId, @PathVariable Integer utilisateurId) {
-        Interview interview = interviewRepository.findById(salonId).orElseThrow();
-        Candidat candidat = CandidatClient.findById(utilisateurId);
-        interview.getCandidat().add(candidat);
-        interviewRepository.save(interview);
-
-    }
 
 
     @GetMapping("/{interview-id}")

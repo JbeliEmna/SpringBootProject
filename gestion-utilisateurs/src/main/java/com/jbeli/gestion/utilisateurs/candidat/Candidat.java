@@ -19,7 +19,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+
 @Entity
 @ApiModel("Contains all the attributes required under Candidat entity")
 public class Candidat extends Utilisateur {

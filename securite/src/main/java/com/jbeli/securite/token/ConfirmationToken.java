@@ -29,4 +29,7 @@ public class ConfirmationToken {
     @JoinColumn(nullable = false, name = "user_id")
     private User user ;
 
+
+    public ConfirmationToken(String token, LocalDateTime now, LocalDateTime localDateTime, User user) {
+    }
 }

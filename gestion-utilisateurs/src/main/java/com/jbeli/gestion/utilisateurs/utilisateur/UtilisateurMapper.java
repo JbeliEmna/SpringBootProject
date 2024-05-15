@@ -1,10 +1,11 @@
 package com.jbeli.gestion.utilisateurs.utilisateur;
 
 import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
-@Builder
+@SuperBuilder
 public class UtilisateurMapper {
     public UtilisateurResponse toUtilisateurDto( Utilisateur u) {
         return UtilisateurResponse.builder()
@@ -18,7 +19,6 @@ public class UtilisateurMapper {
 
     public Utilisateur toUtilisateur(UtilisateurRequest u) {
         Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setId(u.getId());
         utilisateur.setEmail(u.getEmail());
         utilisateur.setMotDePasse(u.getMotDePasse());
         utilisateur.setNumTelephone(u.getNumTelephone());

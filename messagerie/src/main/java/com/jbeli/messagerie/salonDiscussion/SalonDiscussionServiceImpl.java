@@ -1,6 +1,9 @@
 package com.jbeli.messagerie.salonDiscussion;
 
+import com.jbeli.messagerie.client.UtilisateurClient;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -8,11 +11,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class SalonDiscussionServiceImpl implements SalonDiscussionService{
 
-    private final SalonDiscussionRepository salonDiscussionRepository;
-    private final SalonDiscussionMapper mapper ;
+    private  SalonDiscussionRepository salonDiscussionRepository;
+    private  SalonDiscussionMapper mapper ;
+    private UtilisateurClient client;
     @Override
     public SalonDiscussionResponse findById(Integer id) {
         return this.salonDiscussionRepository.findById(id)
@@ -43,5 +48,19 @@ public class SalonDiscussionServiceImpl implements SalonDiscussionService{
     @Override
     public boolean SalonDiscussionExisteParTitre(String titre) {
         return salonDiscussionRepository.findByTitre(titre);
+    }
+
+    @Override
+    public FullSalonDiscussionResponse findSalonDiscussionWithUsers(Integer discussionId) {
+        var salon = salonDiscussionRepository.findById(discussionId)
+                .orElse(SalonDiscussion.builder()
+                        .titre("NOT_FOUND")
+                        .build()
+                );
+        var utilisateurss = client.findAllUsersBySalonDiscussion(discussionId);
+        return FullSalonDiscussionResponse.builder()
+                .titre(salon.getTitre())
+                .utilisateurs(utilisateurss)
+                .build();
     }
 }

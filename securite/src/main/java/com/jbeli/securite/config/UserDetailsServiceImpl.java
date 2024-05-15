@@ -23,7 +23,6 @@ import java.util.Collections;
 @Configuration
 @RequiredArgsConstructor
 @Service
-@AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository repository;

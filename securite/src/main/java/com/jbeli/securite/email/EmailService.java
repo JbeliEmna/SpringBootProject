@@ -3,9 +3,9 @@ package com.jbeli.securite.email;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -17,14 +17,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@AllArgsConstructor
 @RequiredArgsConstructor
 public class EmailService  {
 
+
     private final JavaMailSender mailSender;
+
     private final SpringTemplateEngine templateEngine;
     @Async
-    public void sendEmail(String to, String username , EmailTemplateName emailTemplate , String confirmationUrl , String activationCode , String subject) throws MessagingException {
+    public void sendEmail(String to, String username , EmailTemplateName emailTemplate , String confirmationUrl  , String subject, String activationCode) throws MessagingException {
         String templateName;
         if(emailTemplate == null) {
             templateName = "confirm-email";

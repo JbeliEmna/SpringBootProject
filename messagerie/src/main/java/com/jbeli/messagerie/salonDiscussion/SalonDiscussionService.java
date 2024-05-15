@@ -1,7 +1,6 @@
 package com.jbeli.messagerie.salonDiscussion;
 
 
-import java.util.Date;
 import java.util.List;
 
 public interface SalonDiscussionService {
@@ -13,4 +12,5 @@ public interface SalonDiscussionService {
 
     boolean SalonDiscussionExisteParTitre(String titre);
 
+    FullSalonDiscussionResponse findSalonDiscussionWithUsers(Integer discussionId);
 }

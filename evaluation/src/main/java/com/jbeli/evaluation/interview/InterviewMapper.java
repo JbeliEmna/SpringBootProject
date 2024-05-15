@@ -1,8 +1,5 @@
 package com.jbeli.evaluation.interview;
 
-import com.jbeli.gestion.utilisateurs.utilisateur.Utilisateur;
-import com.jbeli.gestion.utilisateurs.utilisateur.UtilisateurRequest;
-import com.jbeli.gestion.utilisateurs.utilisateur.UtilisateurResponse;
 import lombok.Builder;
 import org.springframework.stereotype.Service;
 

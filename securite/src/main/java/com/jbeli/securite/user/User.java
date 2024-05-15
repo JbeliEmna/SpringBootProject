@@ -27,7 +27,7 @@ import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
+@Builder
 @EqualsAndHashCode
 @EntityListeners(AuditingEntityListener.class)
 @Entity
@@ -57,6 +57,8 @@ public class User implements UserDetails, Principal {
     @Column(insertable = false)
     private LocalDateTime DateDerniereModification ;
 
+    public User(User user) {
+    }
 
 
     @Override

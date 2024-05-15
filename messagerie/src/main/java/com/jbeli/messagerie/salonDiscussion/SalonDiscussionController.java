@@ -1,6 +1,5 @@
 package com.jbeli.messagerie.salonDiscussion;
 
-import com.jbeli.gestion.utilisateurs.utilisateur.Utilisateur;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -20,17 +19,20 @@ public class SalonDiscussionController {
     @Autowired
     private final SalonDiscussionRepository salonDiscussionRepository;
     @Autowired
-    private final UtilisateurClient utilisateurClient;
+    //private final UtilisateurClient utilisateurClient;
 
     private final SalonDiscussionService salonDiscussionService;
 
-    @PostMapping("/salon/{salonId}/utilisateur/{utilisateurId}")
-    public void ajouterUtilisateurAuSalon(@PathVariable Integer salonId, @PathVariable Integer utilisateurId) {
-        SalonDiscussion salon = salonDiscussionRepository.findById(salonId).orElseThrow();
-        Utilisateur utilisateur = utilisateurClient.findById(utilisateurId);
-        salon.getUtilisateurs().add(utilisateur);
-        salonDiscussionRepository.save(salon);
-
+   // @PostMapping("/salon/{salonId}/utilisateur/{utilisateurId}")
+   // public void ajouterUtilisateurAuSalon(@PathVariable Integer salonId, @PathVariable Integer utilisateurId) {
+     //   SalonDiscussion salon = salonDiscussionRepository.findById(salonId).orElseThrow();
+     //   Utilisateur utilisateur = utilisateurClient.findById(utilisateurId);
+       // salon.getUtilisateurs().add(utilisateur);
+        //salonDiscussionRepository.save(salon);}
+    @GetMapping("/utilisateurs/{salonId}")
+    public ResponseEntity<FullSalonDiscussionResponse> findAllSalonDiscussion(
+            @PathVariable("salonDiscussion-id") Integer discussionId){
+        return ResponseEntity.ok(salonDiscussionService.findSalonDiscussionWithUsers(discussionId));
     }
 
     @PostMapping

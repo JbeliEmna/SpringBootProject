@@ -3,18 +3,16 @@ package com.jbeli.gestion.utilisateurs.utilisateur;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Entity
+@SuperBuilder
+
 public class UtilisateurRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
 
     @NotNull(message = "nom ne peut pas être vide")
     @NotBlank(message = "nom ne peut pas être vide")

@@ -8,9 +8,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Entity
 @ApiModel("Contains all the attributes required under claims entity")
 public class Reclamation extends Messages {

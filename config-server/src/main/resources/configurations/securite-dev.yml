@@ -3,9 +3,12 @@ spring :
     name : securite-dev
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/securite-db?createDatabaseIfNotExist=true
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: Emna@2024
+  main :
+    allow-bean-definition-overriding = true
+
   jpa :
     hibernate:
       ddlAuto: update

@@ -10,9 +10,9 @@ import com.jbeli.securite.user.User;
 import com.jbeli.securite.user.UserRepository;
 import com.jbeli.securite.user.UserService;
 import jakarta.mail.MessagingException;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
+import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,21 +26,23 @@ import java.util.List;
 
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class AuthService {
 
-    private final AuthMapper mapper;
-    private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authManager;
-    private final JwtService jwtService;
-    private final UserService userService;
-    private final EmailService emailService;
-    private final RoleRepository roleRepository;
-    private final UserRepository userRepository;
-    private final ConfirmationTokenRepository tokenRepository;
-    @Value("${application.mailing.frontend.activation-url}")
-     private String activationUrl;
+    private AuthMapper mapper;
+    private PasswordEncoder passwordEncoder;
+    private AuthenticationManager authManager;
+    private JwtService jwtService;
+    private  UserService userService;
+    private EmailService emailService;
+    private  RoleRepository roleRepository;
+    private UserRepository userRepository;
+    private  ConfirmationTokenRepository tokenRepository;
+    public String activationUrl;
+    //@Value("${application.mailing.frontend.activation-url}")
+
 
     public void register(RegisterRequest request) throws MessagingException {
         var userRole = roleRepository.findByName("USER")
@@ -61,7 +63,7 @@ public class AuthService {
     private void sendValidationEmail(User user) throws MessagingException {
         var newToken = generateAndSaveActivationToken(user);
 
-        emailService.sendEmail(user.getEmail(),user.FullName(), EmailTemplateName.ACTIVATE_ACCOUNT , activationUrl , newToken , "Account Activation");
+        emailService.sendEmail(user.getEmail(),user.FullName(), EmailTemplateName.ACTIVATE_ACCOUNT , activationUrl , "Account Activation", newToken );
     }
     private String generateAndSaveActivationToken(User user){
         String generateToken = generateActivationCode(6);

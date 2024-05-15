@@ -20,16 +20,14 @@ import java.util.List;
 public class CandidatController {
 
     @Autowired
-    private final InterviewClient interviewClient;
+    //private final InterviewClient interviewClient;
     private final CandidatService candidatService;
 
 
-    @PostMapping("/interview/{interviewId}/candidat/{candidatId}")
-    public void ajouterCandidatAuInterview(@PathVariable("candidatId") Integer candidatId, @PathVariable("interviewId") Integer interviewId) {
+    //@PostMapping("/interview/{interviewId}/candidat/{candidatId}")
+    //public void ajouterCandidatAuInterview(@PathVariable("candidatId") Integer candidatId, @PathVariable("interviewId") Integer interviewId) {
 
-        InterviewClient.ajouterCandidatAuInterview(candidatId, interviewId);
-
-    }
+      //  InterviewClient.ajouterCandidatAuInterview(candidatId, interviewId);}
 
     @GetMapping("/rechercherParDomaine")
     @ApiOperation("find Candidat by Domaine")
